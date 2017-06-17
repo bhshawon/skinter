@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Skinter",
+  "description": "Blocks skin color from images",
+  "version": "0.0.1",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "unlimitedStorage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "externals/jimp.min.js",
+        "externals/jquery.min.js",
+        "planeSet.js",
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}
