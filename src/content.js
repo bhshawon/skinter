@@ -9,6 +9,8 @@ const CB_LOWER = 72;
 const CB_UPPER = 135;
 const Y_LOWER = 80;
 
+const fileSystemManager = new FileSystemManager();
+
 $('img').hide();
 $('img').removeAttr('srcset');
 $(function () {
@@ -16,18 +18,20 @@ $(function () {
     let imageDom = $(this);
     let imageSrc = elem.src;
     imageDom.removeAttr('src');
+    //imageDom.hide();
     Jimp.read(imageSrc, function (err, img) {
       if (!err) {
         filterSkin(img);
 
-        img.getBase64(Jimp.MIME_JPEG, function (err, data) {
+        img.getBase64(Jimp.AUTO, function (err, data) {
           if (err) {
             console.log(err);
           } else {
             imageDom.attr('src', data);
+            imageDom.show();
+            //fileSystemManager.createFile(data, imageDom);
           }
-        })
-        imageDom.show();
+        });
       }
     });
   })
@@ -80,3 +84,4 @@ function filterSkin(img) {
     }
   }
 }
+

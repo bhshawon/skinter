@@ -18,10 +18,11 @@
       "js": [
         "externals/jimp.min.js",
         "externals/jquery.min.js",
+        "fileSystem.js",
         "planeSet.js",
         "content.js"
       ],
-      "run_at": "document_start",
+      "run_at": "document_end",
       "all_frames": true
     }
   ]

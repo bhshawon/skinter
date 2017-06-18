@@ -1,1 +1,74 @@
-"use strict";let planeSet={isSkinColor:function(a,b){let c=getYCrCbColor(a),{Y:d,Cr:e,Cb:f}=c,g=getThetaSet(c),{theta1:h,theta2:i,theta3:j,theta4:k}=g,l=e>=-2*(f+24),m=e>=-(f+17),n=e>=-4*(f+32),o=e>=2.5*(f+h),p=e>=j,q=e>=(k-f)/2,r=e<=(220-f)/6,s=e<=1.34*(f-i);return b&&console.log(`1:${l} 2:${m} 3:${n} 4:${o} 5:${p} 6:${q} 7:${r} 8:${s}`),l&&m&&n&&o&&p&&q&&r&&s}};function getYCrCbColor(a){let b=a.r,c=a.g,d=a.b,e=0.299*b+0.587*c+0.114*d;return{Y:e,Cr:0.565*(b-e),Cb:0.713*(d-e)}}function getThetaSet(a){let b,c,d,e,{Y:f,Cr:g,Cb:h}=a;return 128<f?(b=-2+(256-f)/16,c=20-(256-f)/16,d=6,e=-8):(b=6,c=12,d=2+f/32,e=-16+f/16),{theta1:b,theta2:c,theta3:d,theta4:e}}
+/**
+ * This file implements the C. Garcia and G. Tziritas plane set technique to detect skin color
+ */
+"use strict";
+
+var planeSet = {
+    isSkinColor: function isSkinColor(color, showLog) {
+        var YCrCbColor = getYCrCbColor(color);
+        var Y = YCrCbColor.Y,
+            Cr = YCrCbColor.Cr,
+            Cb = YCrCbColor.Cb;
+
+        var thetaSet = getThetaSet(YCrCbColor);
+        var theta1 = thetaSet.theta1,
+            theta2 = thetaSet.theta2,
+            theta3 = thetaSet.theta3,
+            theta4 = thetaSet.theta4;
+
+
+        var condition1 = Cr >= -2 * (Cb + 24);
+        var condition2 = Cr >= -(Cb + 17);
+        var condition3 = Cr >= -4 * (Cb + 32);
+        var condition4 = Cr >= 2.5 * (Cb + theta1);
+        var condition5 = Cr >= theta3;
+        var condition6 = Cr >= (theta4 - Cb) / 2;
+        var condition7 = Cr <= (220 - Cb) / 6;
+        var condition8 = Cr <= 1.34 * (Cb - theta2);
+        if (showLog) console.log("1:" + condition1 + " 2:" + condition2 + " 3:" + condition3 + " 4:" + condition4 + " 5:" + condition5 + " 6:" + condition6 + " 7:" + condition7 + " 8:" + condition8);
+
+        return condition1 && condition2 && condition3 && condition4 && condition5 && condition6 && condition7 && condition8;
+    }
+};
+
+function getYCrCbColor(color) {
+    var R = color.r,
+        G = color.g,
+        B = color.b;
+
+    var Y = 0.299 * R + 0.587 * G + 0.114 * B;
+    var Cr = (R - Y) * 0.565;
+    var Cb = (B - Y) * 0.713;
+
+    return { Y: Y, Cr: Cr, Cb: Cb };
+}
+
+function getThetaSet(YCrCbColor) {
+    var theta1 = void 0,
+        theta2 = void 0,
+        theta3 = void 0,
+        theta4 = void 0;
+    var Y = YCrCbColor.Y,
+        Cr = YCrCbColor.Cr,
+        Cb = YCrCbColor.Cb;
+
+
+    if (Y > 128) {
+        theta1 = -2 + (256 - Y) / 16;
+        theta2 = 20 - (256 - Y) / 16;
+        theta3 = 6;
+        theta4 = -8;
+    } else {
+        theta1 = 6;
+        theta2 = 12;
+        theta3 = 2 + Y / 32;
+        theta4 = -16 + Y / 16;
+    }
+
+    return {
+        theta1: theta1,
+        theta2: theta2,
+        theta3: theta3,
+        theta4: theta4
+    };
+}
