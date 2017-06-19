@@ -14,7 +14,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/babel src -d dist --ignore externals --presets=es2015 --no-babelrc --watch"
+    "start": "./node_modules/.bin/babel src -d dist --ignore externals --presets=es2015 --no-babelrc --watch",
+    "build": "./node_modules/.bin/babel src -d dist --ignore externals --presets=es2015,babili --no-babelrc"
   },
   "author": "",
   "license": "ISC",

@@ -2,4 +2,4 @@
 
 var transformedSkinColor = 0xFFFFFFFF;
 var detectionMethod = fixedYCrCb;
-var outputMethod = fileSystem;
+var outputMethod = rawBase64;
