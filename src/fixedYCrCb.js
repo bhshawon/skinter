@@ -1,4 +1,5 @@
 'use strict';
+
 const CR_LOWER = 135;
 const CR_UPPER = 180;
 const CB_LOWER = 72;

@@ -18,7 +18,6 @@ const planeSet = {
         let condition6 = Cr >= (theta4 - Cb) / 2;
         let condition7 = Cr <= (220 - Cb) / 6;
         let condition8 = Cr <= 1.34 * (Cb - theta2);
-        if(showLog)console.log(`1:${condition1} 2:${condition2} 3:${condition3} 4:${condition4} 5:${condition5} 6:${condition6} 7:${condition7} 8:${condition8}`);
 
         return condition1 && condition2 && condition3 && condition4 && condition5 && condition6 && condition7 && condition8;
     }

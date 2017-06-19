@@ -1,3 +1,5 @@
+'use strict';
+
 function FileSystemManager() {
   const QUOTA = 2 * 1024 * 1024;
 

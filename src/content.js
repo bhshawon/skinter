@@ -2,8 +2,7 @@
 
 console.log('Content script running');
 
-const fileSystemManager = new FileSystemManager();
-
+// const fileSystemManager = new FileSystemManager();
 
 $('img').hide();
 $('img').removeAttr('srcset');
@@ -38,7 +37,7 @@ function filterSkin(img) {
   for (let i = 0; i < width; i++) {
     for (let j = 0; j < height; j++) {
       let color = Jimp.intToRGBA(img.getPixelColor(i, j));
-      // let normalizedColor = getNormalizedColor(color);
+
       if (detectionMethod.isSkinColor(color)) {
         img.setPixelColor(transformedSkinColor, i, j);
       }
