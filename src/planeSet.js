@@ -3,7 +3,7 @@
  */
 "use strict";
 
-let planeSet = {
+const planeSet = {
     isSkinColor: function isSkinColor(color, showLog) {
         let YCrCbColor = getYCrCbColor(color);
         let { Y, Cr, Cb } = YCrCbColor;

@@ -18,8 +18,12 @@
       "js": [
         "externals/jimp.min.js",
         "externals/jquery.min.js",
+        "colorSpace.js",
         "fileSystem.js",
         "planeSet.js",
+        "fixedYCrCb.js",
+        "fixedRGB.js",
+        "settings.js",
         "content.js"
       ],
       "run_at": "document_end",
