@@ -2,3 +2,4 @@
 
 let transformedSkinColor = 0xFFFFFFFF;
 let detectionMethod = fixedYCrCb;
+let outputMethod = fileSystem;

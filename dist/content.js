@@ -7,28 +7,21 @@ console.log('Content script running');
 $('img').hide();
 $('img').removeAttr('srcset');
 $(function () {
-  $('img').each(function (i, elem) {
-    var imageDom = $(this);
-    var imageSrc = elem.src;
-    imageDom.removeAttr('src');
-    //imageDom.hide();
-    Jimp.read(imageSrc, function (err, img) {
-      if (!err) {
-        filterSkin(img);
-
-        img.getBase64(Jimp.AUTO, function (err, data) {
-          if (err) {
-            console.log(err);
-          } else {
-            imageDom.attr('src', data);
-            imageDom.show();
-            //fileSystemManager.createFile(data, imageDom);
-          }
-        });
-      }
-    });
-  });
+  $('img').each(processImage);
 });
+
+function processImage(i, elem) {
+  var imageDom = $(this);
+  var imageSrc = elem.src;
+  imageDom.removeAttr('src');
+
+  Jimp.read(imageSrc, function (err, img) {
+    if (!err) {
+      filterSkin(img);
+      outputMethod.outputImage(img, imageDom);
+    }
+  });
+}
 
 function filterSkin(img) {
   var width = img.bitmap.width;

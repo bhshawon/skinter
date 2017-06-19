@@ -18,11 +18,13 @@
       "js": [
         "externals/jimp.min.js",
         "externals/jquery.min.js",
+        "utils.js",
         "colorSpace.js",
-        "fileSystem.js",
-        "planeSet.js",
-        "fixedYCrCb.js",
-        "fixedRGB.js",
+        "outputMethods/fileSystem.js",
+        "outputMethods/rawBase64.js",
+        "detectionMethods/planeSet.js",
+        "detectionMethods/fixedYCrCb.js",
+        "detectionMethods/fixedRGB.js",
         "settings.js",
         "content.js"
       ],
