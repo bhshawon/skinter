@@ -4,11 +4,30 @@ console.log('Content script running');
 
 // const fileSystemManager = new FileSystemManager();
 
-$('img').hide();
-$('img').removeAttr('srcset');
+var documentImages = $('img');
+documentImages.hide();
+documentImages.removeAttr('srcset');
 $(function () {
-  $('img').each(processImage);
+  documentImages.each(processImage);
 });
+
+var mutationObserver = new MutationObserver(function (mutations) {
+  mutations.forEach(function (mutation) {
+    if (mutation.addedNodes) {
+      var addedNodes = $(mutation.addedNodes);
+      var images = addedNodes.find('img');
+      images.each(processImage);
+    }
+  });
+});
+
+// const target = document.getElementsByTagName('body');
+var options = {
+  subtree: true,
+  childList: true
+};
+
+mutationObserver.observe(document, options);
 
 function processImage(i, elem) {
   var imageDom = $(this);

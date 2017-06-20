@@ -4,11 +4,31 @@ console.log('Content script running');
 
 // const fileSystemManager = new FileSystemManager();
 
-$('img').hide();
-$('img').removeAttr('srcset');
+let documentImages = $('img');
+documentImages.hide();
+documentImages.removeAttr('srcset');
 $(function () {
-  $('img').each(processImage);
+  documentImages.each(processImage);
 })
+
+const mutationObserver = new MutationObserver(function (mutations) {
+  mutations.forEach(mutation => {
+    if (mutation.addedNodes) {
+      let addedNodes = $(mutation.addedNodes)
+      let images = addedNodes.find('img');
+      images.each(processImage);
+    }
+  })
+});
+
+// const target = document.getElementsByTagName('body');
+const options = {
+  subtree: true,
+  childList: true
+}
+
+mutationObserver.observe(document, options);
+
 
 function processImage(i, elem) {
   let imageDom = $(this);
