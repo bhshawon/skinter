@@ -16,17 +16,19 @@
         "*://*/*"
       ],
       "js": [
-        "externals/jimp.min.js",
-        "externals/jquery.min.js",
-        "utils.js",
-        "colorSpace.js",
-        "outputMethods/fileSystem.js",
-        "outputMethods/rawBase64.js",
-        "detectionMethods/planeSet.js",
-        "detectionMethods/fixedYCrCb.js",
-        "detectionMethods/fixedRGB.js",
-        "settings.js",
-        "content.js"
+        "js/externals/jimp.min.js",
+        "js/externals/jquery.min.js",
+        "js/utils.js",
+        "js/colorSpace.js",
+        "js/outputMethods/rawBase64.js",
+        "js/outputMethods/fileSystem.js",
+        "js/detectionMethods/planeSet.js",
+        "js/detectionMethods/fixedYCrCb.js",
+        "js/detectionMethods/fixedRGB.js",
+        "js/settings.js",
+        "js/imageProcessor.js",
+        "js/mutationObserver.js",
+        "js/main.js"
       ],
       "run_at": "document_end",
       "all_frames": true
