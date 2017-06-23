@@ -1,14 +1,19 @@
 'use strict';
 
 function processImage(i, elem) {
-  var imageDom = $(this);
-  var imageSrc = elem.src;
-  imageDom.removeAttr('src');
+  var elementDom = $(this);
+  var element = elementProvider.getElement(elementDom);
+  var imageSource = element.getImageSource(elementDom);
 
-  Jimp.read(imageSrc, function (err, img) {
-    if (!err) {
-      filterSkin(img);
-      outputMethod.outputImage(img, imageDom);
+  element.hideImage(elementDom);
+
+  transformImage(imageSource, function (err, img) {
+    if (err) {
+      console.error(err.stack || err);
+    } else {
+      outputMethod.outputImage(img, function (err, newSource) {
+        element.setSource(imageDom, newSource);
+      });
     }
   });
 }
@@ -26,4 +31,20 @@ function filterSkin(img) {
       }
     }
   }
+}
+
+function transformImage(source, callback) {
+  Jimp.read(source, function (err, img) {
+    if (err) {
+      callback(err, null);
+    } else {
+      filterSkin(img);
+      callback(null, img);
+    }
+  });
+}
+
+function setSource(imageDom, source) {
+  imageDom.attr('src', source);
+  imageDom.show();
 }

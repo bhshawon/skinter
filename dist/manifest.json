@@ -26,6 +26,8 @@
         "js/detectionMethods/fixedYCrCb.js",
         "js/detectionMethods/fixedRGB.js",
         "js/settings.js",
+        "js/elementType/elementProvider.js",
+        "js/elementType/imgElement.js",
         "js/imageProcessor.js",
         "js/mutationObserver.js",
         "js/main.js"
