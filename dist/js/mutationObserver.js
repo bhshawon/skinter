@@ -11,8 +11,14 @@ var mutationObserver = new MutationObserver(function (mutations) {
 
       if (mutation.addedNodes) {
         var addedNodes = $(mutation.addedNodes);
-        var images = addedNodes.find('img');
-        images.each(processImage);
+        var imageElements = addedNodes.find('img');
+        // let backgroundImages = utils.getBackgroundImages(addedNodes);
+        // let addedImages = $.merge(imageElements, backgroundImages);
+
+        imageElements.each(function (i, elem) {
+          var imageDom = $(this);
+          processImage(imageDom);
+        });
       }
     }
   } catch (err) {

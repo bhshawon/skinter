@@ -2,13 +2,14 @@
 
 const imgElement = {
   hideImage: function hideImage(imageDom) {
-    imageDom.removeAttr('src');
+    imageDom.removeAttr('srcset');
+    imageDom.hide();
   },
   getImageSource: function getImageSource(imageDom) {
     return imageDom.prop('src');
   },
-  setSource: function setSource(imageDom, source) {
-    imageDom.attr('src', source);
+  revealTransformedImage: function revealTransformedImage(imageDom, transformedImageSource) {
+    imageDom.attr('src', transformedImageSource);
     imageDom.show();
   }
 }

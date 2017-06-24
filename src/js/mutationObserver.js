@@ -2,8 +2,14 @@ const mutationObserver = new MutationObserver(function (mutations) {
   for (let mutation of mutations) {
     if (mutation.addedNodes) {
       let addedNodes = $(mutation.addedNodes)
-      let images = addedNodes.find('img');
-      images.each(processImage);
+      let imageElements = addedNodes.find('img');
+      // let backgroundImages = utils.getBackgroundImages(addedNodes);
+      // let addedImages = $.merge(imageElements, backgroundImages);
+
+      imageElements.each(function (i, elem) {
+        let imageDom = $(this);
+        processImage(imageDom);
+      });
     }
   }
 });

@@ -2,11 +2,10 @@
 
 const elementProvider = {
   getElement: function getElement(elementDom) {
-    if (elementDom.nodeName === 'IMG') {
+    if (elementDom.prop("nodeName") === 'IMG') {
       return imgElement;
     } else {
-      return null;
-      // return backgroundImageElement;
+      return backgroundImageElement;
     }
   }
 }

@@ -1,45 +1,42 @@
 'use strict';
 
-function processImage(i, elem) {
-  var elementDom = $(this);
+function processImage(elementDom) {
   var element = elementProvider.getElement(elementDom);
   var imageSource = element.getImageSource(elementDom);
 
   element.hideImage(elementDom);
 
-  transformImage(imageSource, function (err, img) {
-    if (err) {
-      console.error(err.stack || err);
-    } else {
-      outputMethod.outputImage(img, function (err, newSource) {
-        element.setSource(imageDom, newSource);
+  transformImage(imageSource, function (err, image) {
+    if (!err) {
+      outputMethod.outputImage(image, function (err, transformedImageSource) {
+        element.revealTransformedImage(elementDom, transformedImageSource);
       });
     }
   });
 }
 
-function filterSkin(img) {
-  var width = img.bitmap.width;
-  var height = img.bitmap.height;
+function filterSkin(image) {
+  var width = image.bitmap.width;
+  var height = image.bitmap.height;
 
   for (var i = 0; i < width; i++) {
     for (var j = 0; j < height; j++) {
-      var color = Jimp.intToRGBA(img.getPixelColor(i, j));
+      var color = Jimp.intToRGBA(image.getPixelColor(i, j));
 
       if (detectionMethod.isSkinColor(color)) {
-        img.setPixelColor(transformedSkinColor, i, j);
+        image.setPixelColor(transformedSkinColor, i, j);
       }
     }
   }
 }
 
 function transformImage(source, callback) {
-  Jimp.read(source, function (err, img) {
+  Jimp.read(source, function (err, image) {
     if (err) {
       callback(err, null);
     } else {
-      filterSkin(img);
-      callback(null, img);
+      filterSkin(image);
+      callback(null, image);
     }
   });
 }
