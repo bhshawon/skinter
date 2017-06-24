@@ -2,5 +2,5 @@
 
 let transformedSkinColor = 0xFFFFFFFF;
 let detectionMethod = fixedYCrCb;
-let outputMethod = rawBase64;
+let outputMethod = fileSystem;
 
