@@ -1,5 +1,5 @@
 'use strict';
 
 var transformedSkinColor = 0xFFFFFFFF;
-var detectionMethod = fixedYCrCb;
+var detectionMethod = fixedHSV;
 var outputMethod = fileSystem;

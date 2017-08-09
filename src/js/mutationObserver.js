@@ -3,6 +3,7 @@ const mutationObserver = new MutationObserver(function (mutations) {
     if (mutation.addedNodes) {
       let addedNodes = $(mutation.addedNodes)
       let imageElements = addedNodes.find('img');
+      imageElements.hide();
       // let backgroundImages = utils.getBackgroundImages(addedNodes);
       // let addedImages = $.merge(imageElements, backgroundImages);
 

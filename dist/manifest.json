@@ -25,6 +25,7 @@
         "js/detectionMethods/planeSet.js",
         "js/detectionMethods/fixedYCrCb.js",
         "js/detectionMethods/fixedRGB.js",
+        "js/detectionMethods/fixedHSV.js",
         "js/settings.js",
         "js/elementType/imgElement.js",
         "js/elementType/backgroundImageElement.js",
