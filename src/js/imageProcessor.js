@@ -16,18 +16,41 @@ function processImage(elementDom) {
 }
 
 function filterSkin(image) {
+  const HORIZONTAL_COUNT = 50;
+  const IGNORE_MARGIN = 0.3;
   let width = image.bitmap.width;
   let height = image.bitmap.height;
 
-  for (let i = 0; i < width; i++) {
-    for (let j = 0; j < height; j++) {
-      let color = Jimp.intToRGBA(image.getPixelColor(i, j));
+  let splitSquares;
 
-      if (detectionMethod.isSkinColor(color)) {
-        image.setPixelColor(transformedSkinColor, i, j);
+  if (width <= HORIZONTAL_COUNT) {
+    splitSquares = [{
+      startWidth: 0,
+      startHeight: 0,
+      endWidth: width,
+      endHeight: height
+    }];
+  } else {
+    splitSquares = utils.splitRectIntoSquares(width, height, HORIZONTAL_COUNT);
+  }
+
+  let squarePixelCount = splitSquares[0].endWidth * splitSquares[0].endHeight;
+
+  splitSquares.map(square => {
+    let detectedPixels = [];
+    for (let i = square.startWidth; i < square.endWidth; i++) {
+      for (let j = square.startHeight; j < square.endHeight; j++) {
+        let color = Jimp.intToRGBA(image.getPixelColor(i, j));
+
+        if (detectionMethod.isSkinColor(color)) {
+          detectedPixels.push([i, j]);
+        }
       }
     }
-  }
+    if (detectedPixels.length / squarePixelCount > IGNORE_MARGIN) {
+      detectedPixels.map(pixel => image.setPixelColor(transformedSkinColor, pixel[0], pixel[1]));
+    }
+  })
 }
 
 function transformImage(source, callback) {

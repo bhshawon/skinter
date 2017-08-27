@@ -1,6 +1,6 @@
 'use strict';
 
-let transformedSkinColor = 0xFFFFFFFF;
-let detectionMethod = fixedHSV;
-let outputMethod = fileSystem;
+const transformedSkinColor = 0xFFFFFFFF;
+const detectionMethod = fixedYCrCb;
+const outputMethod = fileSystem;
 
